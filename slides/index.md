@@ -93,6 +93,32 @@ And the community grew! People are using Suave for [IoT][s-iot], it's driving th
 
 Say whaat?
 
+---
+
+```fsharp
+#r "../demos/say/packages/Suave/lib/net40/Suave.dll"
+open Suave; open Suave.Successful; open Suave.Operators; open Suave.Filters
+let executeProcess exe cmdline = "" // stub
+let handle: WebPart =
+  fun ctx ->
+    async {
+      let input = ctx.request.formData "to-say"
+      match input with
+      | Choice1Of2 input ->
+        // note; vulnerable to command injection
+        let out = executeProcess "say" input
+        return! Redirection.FOUND "/" ctx
+      | Choice2Of2 err ->
+        return! RequestErrors.BAD_REQUEST err ctx
+    }
+
+let app: WebPart =
+  choose [
+    POST >=> handle
+    Files.browseFileHome "index.html"
+  ]
+```
+
 ***
 
 ### Now you talk!

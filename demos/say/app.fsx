@@ -47,4 +47,5 @@ let app: WebPart =
 let config =
   { defaultConfig with bindings = [ HttpBinding.createSimple HTTP "127.0.0.1" 8001 ]
                        homeFolder = Some Environment.CurrentDirectory }
+
 startWebServer config app
