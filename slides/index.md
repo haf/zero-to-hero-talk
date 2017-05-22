@@ -8,6 +8,14 @@
 
 ### From Zero to Hero with HTTP APIs
 
+<div style="display:none">
+```fsharp
+#r "../demos/say/packages/Suave/lib/net40/Suave.dll"
+open Suave; open Suave.Successful; open Suave.Operators; open Suave.Filters
+let executeProcess exe cmdline = "" // stub
+```
+</div>
+
 ***
 
 ### Agenda
@@ -95,28 +103,20 @@ Say whaat?
 
 ---
 
+### Making it easy
+
 ```fsharp
-#r "../demos/say/packages/Suave/lib/net40/Suave.dll"
-open Suave; open Suave.Successful; open Suave.Operators; open Suave.Filters
-let executeProcess exe cmdline = "" // stub
 let handle: WebPart =
   fun ctx ->
     async {
       let input = ctx.request.formData "to-say"
       match input with
       | Choice1Of2 input ->
-        // note; vulnerable to command injection
         let out = executeProcess "say" input
         return! Redirection.FOUND "/" ctx
       | Choice2Of2 err ->
         return! RequestErrors.BAD_REQUEST err ctx
     }
-
-let app: WebPart =
-  choose [
-    POST >=> handle
-    Files.browseFileHome "index.html"
-  ]
 ```
 
 ***
@@ -130,6 +130,10 @@ Chat
 ### Deployments must be easy!
 
 minikube!
+
+***
+
+### How does it work?
 
 ***
 
