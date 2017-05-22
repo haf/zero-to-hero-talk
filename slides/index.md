@@ -11,6 +11,14 @@
 <div style="display:none">
 ```fsharp
 #r "../demos/say/packages/Suave/lib/net40/Suave.dll"
+#r "../packages/slides/FParsec/lib/net40-client/FParsec.dll"
+#r "../packages/slides/Chiron/lib/net40/Chiron.dll"
+#r "../packages/slides/Arachne.Core/lib/net40/Arachne.Core.dll"
+#r "../packages/slides/Arachne.Http/lib/net40/Arachne.Http.dll"
+#r "../packages/slides/Arachne.Language/lib/net40/Arachne.Language.dll"
+#r "../packages/slides/Arachne.Uri/lib/net40/Arachne.Uri.dll"
+#r "../packages/slides/Suave.Locale/lib/net40/Suave.Locale.dll"
+#r "../packages/slides/Suave.Testing/lib/net40/Suave.Testing.dll"
 open Suave; open Suave.Successful; open Suave.Operators; open Suave.Filters
 let executeProcess exe cmdline = "" // stub
 ```
@@ -30,7 +38,6 @@ let executeProcess exe cmdline = "" // stub
  1. Suave fundamentals
  1. Suave internals
  1. Patterns
- 1. API reference https://suave.io/Suave.html walkthrough
  1. Further Resources
  
 ***
@@ -157,14 +164,17 @@ minikube!
 Using [Suave.Locale][s-locale]:
 
 ```
-let neg : LangNeg =
+open Arachne.Http; open Arachne.Language; open Suave.Locale; open Suave.Filters
+let print (intl: IntlData) =
+  OK (sprintf "You have locale '%O'" intl.locale)
+let neg: LangNeg =
   Negotiate.negotiate
     [ ReqSources.parseQuery "locale"
       ReqSources.parseCookie "locale"
       ReqSources.parseAcceptable
       ReqSources.always (Range [ "en" ])]
-    [ LangSources.testAndGetJson test get
-      LangSources.always (defaultLanguage appCtx.settings.rootPath) ]
+    //[ LangSources.always (defaultLanguage appCtx.settings.rootPath) ]
+    []
   |> Negotiate.assumeSource
 let app =
   GET >=> path "/i18n/sample"
@@ -193,7 +203,6 @@ let app =
 
 ---
 
-
 ### Desirable properties
 
  - Fast (enough) – 10k requests per second
@@ -209,75 +218,188 @@ let app =
 
 ## Patterns
 
-   - Logging `open Suave.Logging`
-   - Env vars https://12factor.net/ https://kubernetes.io/docs/tasks/inject-data-application/distribute-credentials-secure/
-   - Suave-server-per test https://github.com/logibit/Logibit.Hawk/blob/master/src/Logibit.Hawk.Suave.Tests/Hawk.fs#L77-L96
+---
+
+### Logging
+
+```fsharp
+open Suave.Logging
+let logger = Targets.create Info [| "Suave" |]
+let app =
+  GET >=> choose [
+    path "/" >=> OK "Hi"
+    // more paths
+  ] >=> logWithLevelStructured Info logger logFormatStructured
+```
+
+---
+
+### Env vars
+
+  * [12 factor apps][12fa]
+  * [Kubernetes env var][kube-env]
+
+---
+
+### Server-per-test
+
+ - [Expecto][expecto]
+ - [Suave.Testing][suave-testing]
+ - [Suave-server-per test][ref-server-per-test]
+
+<code><pre>
+open Expecto
+open Expecto.Flip
+open Suave.Testing
+
+runWith defaultConfig (OK "Ho ho ho")
+|> req HttpMethod.GET None id (fun resp ->
+  resp.StatusCode
+  |> Expect.equal "Should be unauthorised" Unauthorised
+)
+</code></pre>
 
 ***
 
+### How do I get started?
+
+  - [Fable Suave Scaffold](https://github.com/fable-compiler/fable-suave-scaffold/)
+    - Write F#, run JS in the browser
+    - Works with Webpack
+  - [F# Forge template][forge]
+  - [Watch a video][ndc-getting-started]
+
+***
+
+## More!!
+
+---
+
+### IoT state-machine engine
+
+[Suave EvReact](https://github.com/unipi-itc/Suave.EvReact)
+
+---
+
+### Build nice presentations
+
+[FsReveal](https://github.com/fsprojects/FsReveal)
+
+---
+
+### Authenticate with OAuth
+
+[Suave.OAuth](https://github.com/SuaveIO/Suave.OAuth)
+
+---
+
+### Authenticate with Hawk
+
+Stronger security
+
+[Logibit Hawk](https://github.com/logibit/logibit.hawk/)
+
+---
+
+### Run WebSharper on Suave
+
+[WebSharper and Suave](https://www.nuget.org/packages/WebSharper.Suave/)
+
+---
+
+### Azure functions
+
+[Suave and Azure functions](https://www.nuget.org/packages/Suave.Azure.Functions/)
 
 
- Extra:
+---
 
- 1. Agenda
- 1. About me
- 1. About [Suave.io](https://suave.io) and Ademar
- 1. Demo Say what
- 1. Demo chat
- 1. Suave fundamentals
-   - Functions for compositions
-   - A web server implementation
-   - Supports WebSockets and Server-Sent Events
- 1. Package with Dockerfile
- 1. Push to dockerhub
- 1. Demo deploy on minikube
- 1. Suave internals
- 1. Patterns
+### Learn about HyperMedia!
 
- 1. API reference https://suave.io/Suave.html walkthrough
+[Hypermedia APIs with Suave](https://vimeo.com/album/2132360/video/171317244)
+
+---
+
+### Ship your JS logs to the server
+
+[Logary SuaveReporter](https://www.nuget.org/packages/Logary.Services.SuaveReporter/)
+
+---
+
+### Learn about Hopac and Suave
+
+[Building a chat](https://github.com/haf/suave-presentation.2015-09-03)
+
+---
+
+### DotLiquid with Suave
+
+[Suave DotLiquid](https://www.nuget.org/packages/Suave.DotLiquid/)
+
+---
+
+### Razor with Suave
+
+[Suave Razor](https://www.nuget.org/packages/Suave.Razor/)
+
+---
+
+### A HTML-esque DSL with Suave
+
+[Example in Suave Music Store][suave-music-store-forms]
+
+---
+
+### What?
+
+[Hypermedia-driven lambda calculus evaluator.](https://github.com/einarwh/hyperlamb)
+
+***
+
+## Now you try!
+
+```bash
+brew install mono git
+git clone https://github.com/haf/zero-to-hero-talk.git
+cd zero-to-hero
+./build.sh
+cd demos/say
+mono paket.exe install
+fsharpi app.fsx
+```
+
+---
+
+### More from me
+
+ - [Expecto – smooth testing for humans][expecto]
+ - [Logary – Logs and metrics are one!][logary]
+ - [YoLo – effing utilities][yolo]
+ - [Http.fs – A simple, functional HTTP client library for F#][httpfs]
+
+***
+
+## Getting in touch
+
+E-mail me at [henrik@qvitoo.com](mailto:henrik@qvitoo.com?subject=Suave), or tweet [@henrikfeldt](https://twitter.com/henrikfeldt).
+
+Follow [@funcprogsthlm](https://twitter.com/funcprogsthlm) and [@suaveio](https://twitter.com/suaveio).
+
+Chat with us [gitter.im/suaveio/suave](https://gitter.im/SuaveIO/suave).
+
+***
+
  1. Further Resources
- - Books
-   - [Suave Music Store](https://www.gitbook.com/book/theimowski/suave-music-store/details)
-   - [F# applied](http://products.tamizhvendan.in/fsharp-applied/)
-
- - Getting started
-   - [Fable Suave Scaffold](https://github.com/fable-compiler/fable-suave-scaffold/)
-   - Ionide Suave template
-
  - Libraries on top of suave
-   - [Suave EvReact](https://github.com/unipi-itc/Suave.EvReact)
-   - [Suave Swagger](https://github.com/rflechner/Suave.Swagger/blob/develop/examples/Suave.Swagger.PetStoreAPi/Program.fs)
-   - https://rflechner.github.io/Suave.RouteTypeProvider/tutorial.html + [Presentation](https://rflechner.github.io/SuavePresentation/#/5/1)
-   - [FsReveal](https://github.com/fsprojects/FsReveal)
-   - [Ionide/F# auto complete](https://github.com/fsharp/FsAutoComplete)
-   - [Suave.OAuth](https://github.com/SuaveIO/Suave.OAuth)
-   - [Logary SuaveReporter](https://www.nuget.org/packages/Logary.Services.SuaveReporter/)
-   - [Suave Testing](https://github.com/SuaveIO/suave/blob/master/src/Suave.Testing/Testing.fs)
-   - [Suave Locale](https://github.com/SuaveIO/Suave.Locale)
-   - [Logibit Hawk](https://github.com/logibit/logibit.hawk/)
-   - [Suave DotLiquid](https://www.nuget.org/packages/Suave.DotLiquid/)
-   - [Suave Razor](https://www.nuget.org/packages/Suave.Razor/)
-   - [Suave and Azure functions](https://www.nuget.org/packages/Suave.Azure.Functions/)
-   - [WebSharper and Suave](https://www.nuget.org/packages/WebSharper.Suave/)
    - [Shaver](https://www.nuget.org/packages/Shaver/)
-
  - Cool demo
    - [SMSServer](https://github.com/rflechner/SmsServer/blob/master/iOS/AppDelegate.fs)
    - [Suave from Scratch](https://github.com/search?p=4&q=nuget+Suave&type=Code&utf8=%E2%9C%93) + [YouTube](https://www.youtube.com/watch?v=ujxwW6fFXOc)
    - [Say whaaat?](https://gist.github.com/haf/007259288fe98de62a88bb4ca37cb944#file-web-fsx)
-   - [Hypermedia-driven lambda calculus evaluator. Yes.](https://github.com/einarwh/hyperlamb)
-
- - Videos
-   - [Hypermedia APIs with Suave](https://vimeo.com/album/2132360/video/171317244)
-   - [Intro to VS 2017 F# and Suave](https://channel9.msdn.com/Shows/Visual-Studio-Toolbox/Visual-F-Tools)
-   - https://vimeo.com/album/2132360/video/171317244
-   - https://github.com/haf/suave-presentation.2015-09-03
-
- - Github
-   - https://github.com/suaveio
 
  [suave]: https://suave.io
  [suave-api]: https://suave.io/Suave.html
+ [suave-testing]: https://www.nuget.org/packages/Suave.Testing
  [qvitoo]: https://qvitoo.com?utc_source=presentation&amp;utm_campaign=zero-hero
  [s-iot]: https://github.com/unipi-itc/Suave.EvReact
  [s-auto]: https://github.com/fsharp/FsAutoComplete
@@ -295,3 +417,15 @@ let app =
  [ref-bytes]: https://github.com/SuaveIO/suave/blob/master/src/Suave/HttpOutput.fs#L42
  [ref-st]: https://github.com/SuaveIO/suave/blob/master/src/Suave/HttpOutput.fs#L68
  [ref-null]: https://github.com/SuaveIO/suave/blob/master/src/Suave/HttpOutput.fs#L71
+
+ [ref-server-per-test]: https://github.com/logibit/Logibit.Hawk/blob/master/src/Logibit.Hawk.Suave.Tests/Hawk.fs#L77-L96
+
+ [12fa]: https://12factor.net/
+ [kube-env]: https://kubernetes.io/docs/tasks/inject-data-application/distribute-credentials-secure/
+ [forge]: http://forge.run/
+ [expecto]: https://github.com/haf/expecto
+ [logary]: https://github.com/logary/logary
+ [httpfs]: https://github.com/haf/Http.fs
+ [yolo]: https://github.com/haf/YoLo/
+ [suave-music-store-forms]: https://theimowski.gitbooks.io/suave-music-store/content/en/logon_form.html
+ [ndc-getting-started]: https://vimeo.com/album/2132360/video/171317244

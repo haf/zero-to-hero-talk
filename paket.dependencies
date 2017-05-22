@@ -4,3 +4,10 @@ framework NET461
 nuget FsReveal
 nuget FAKE
 nuget Suave
+
+
+group Slides
+  source https://nuget.org/api/v2
+  nuget Suave.Locale
+  nuget Suave.Swagger
+  nuget Suave.Testing
