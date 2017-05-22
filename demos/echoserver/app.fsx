@@ -47,6 +47,6 @@ let app: WebPart =
   )
 
 let config =
-  { defaultConfig with bindings = [ HttpBinding.createSimple HTTP "127.0.0.1" 8002 ] }
+  { defaultConfig with bindings = [ HttpBinding.createSimple HTTP "0.0.0.0" 8002 ] }
 
 startWebServer config app

@@ -7,8 +7,52 @@
 ***
 
 ### From Zero to Hero with HTTP APIs
+
 ***
+
 ### Agenda
+
+ 1. Agenda
+ 1. About me
+ 1. About [Suave.io](https://suave.io) and Ademar
+ 1. Demo Say what
+ 1. Demo chat
+ 1. Suave fundamentals
+ 1. Package with Dockerfile
+ 1. Push to dockerhub
+ 1. Demo deploy on minikube
+ 1. Suave internals
+ 1. Patterns
+ 1. API reference https://suave.io/Suave.html walkthrough
+ 1. Further Resources
+ 
+***
+
+### About me
+
+<dl>
+  <dt>Name</dt>
+  <dd>Henrik Feldt</dd>
+
+  <dt>Founder of</dt>
+  <dd>[qvitoo.com – A.I for the digital company](https://qvitoo.com?utc_source=presentation&amp;utm_campaign=zero-hero)</dd>
+
+  <dt>Will talk about</dt>
+  <dd>[Getting started with HTTP](https://suave.io)</dd>
+
+  <dt>Why?</dt>
+  <dd>Give you the tools to create what you want, on the web, or for home automation, or ...</dd>
+</dl>
+
+***
+
+### About Suave.IO
+
+
+
+***
+
+ Extra:
 
  1. Agenda
  1. About me
