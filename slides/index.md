@@ -376,30 +376,26 @@ fsharpi app.fsx
  - [Logary – Logs and metrics are one!][logary]
  - [YoLo – effing utilities][yolo]
  - [Http.fs – A simple, functional HTTP client library for F#][httpfs]
+ - [F# in docker][fsharp-docker]
 
 ***
 
 ## Getting in touch
 
-E-mail me at [henrik@qvitoo.com](mailto:henrik@qvitoo.com?subject=Suave), or tweet [@henrikfeldt](https://twitter.com/henrikfeldt).
+E-mail me at [henrik@qvitoo.com](mailto:henrik@qvitoo.com?subject=Suave), or tweet [@henrikfeldt](https://twitter.com/henrikfeldt). Also check out [qvitoo.com][qvitoo].
 
-Follow [@funcprogsthlm](https://twitter.com/funcprogsthlm) and [@suaveio](https://twitter.com/suaveio).
+Follow [@funcprogsthlm](https://twitter.com/funcprogsthlm) and [@suaveio](https://twitter.com/suaveio) and [@foocafesthlm][https://twitter.com/foocafesthlm].
 
 Chat with us [gitter.im/suaveio/suave](https://gitter.im/SuaveIO/suave).
 
-***
+Help out with Suave – tagged ["you-take-it"][suave-issues]
 
- 1. Further Resources
- - Libraries on top of suave
-   - [Shaver](https://www.nuget.org/packages/Shaver/)
- - Cool demo
-   - [SMSServer](https://github.com/rflechner/SmsServer/blob/master/iOS/AppDelegate.fs)
-   - [Suave from Scratch](https://github.com/search?p=4&q=nuget+Suave&type=Code&utf8=%E2%9C%93) + [YouTube](https://www.youtube.com/watch?v=ujxwW6fFXOc)
-   - [Say whaaat?](https://gist.github.com/haf/007259288fe98de62a88bb4ca37cb944#file-web-fsx)
+***
 
  [suave]: https://suave.io
  [suave-api]: https://suave.io/Suave.html
  [suave-testing]: https://www.nuget.org/packages/Suave.Testing
+ [suave-issues]: https://github.com/SuaveIO/suave/issues?q=is%3Aopen+is%3Aissue+label%3Ayou-take-it
  [qvitoo]: https://qvitoo.com?utc_source=presentation&amp;utm_campaign=zero-hero
  [s-iot]: https://github.com/unipi-itc/Suave.EvReact
  [s-auto]: https://github.com/fsharp/FsAutoComplete
@@ -429,3 +425,4 @@ Chat with us [gitter.im/suaveio/suave](https://gitter.im/SuaveIO/suave).
  [yolo]: https://github.com/haf/YoLo/
  [suave-music-store-forms]: https://theimowski.gitbooks.io/suave-music-store/content/en/logon_form.html
  [ndc-getting-started]: https://vimeo.com/album/2132360/video/171317244
+ [fsharp-docker]: https://github.com/fsprojects/docker-fsharp
