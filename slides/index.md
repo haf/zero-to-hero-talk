@@ -1,164 +1,74 @@
-- title : FsReveal
-- description : Introduction to FsReveal
-- author : Karlkim Suwanmongkol
-- theme : night
-- transition : default
+- title: From Zero to Hero of HTTP APIs
+- description: How Suave was build and what it is now
+- author: Henrik Feldt
+- theme: night
+- transition: default
 
 ***
 
-### What is FsReveal?
-
-- Generates [reveal.js](http://lab.hakim.se/reveal-js/#/) presentation from [markdown](http://daringfireball.net/projects/markdown/)
-- Utilizes [FSharp.Formatting](https://github.com/tpetricek/FSharp.Formatting) for markdown parsing
-- Get it from [http://fsprojects.github.io/FsReveal/](http://fsprojects.github.io/FsReveal/)
-
-![FsReveal](images/logo.png)
-
+### From Zero to Hero with HTTP APIs
 ***
+### Agenda
 
-### Reveal.js
+ 1. Agenda
+ 1. About me
+ 1. About [Suave.io](https://suave.io) and Ademar
+ 1. Demo Say what
+ 1. Demo chat
+ 1. Suave fundamentals
+   - Functions for compositions
+   - A web server implementation
+   - Supports WebSockets and Server-Sent Events
+ 1. Package with Dockerfile
+ 1. Push to dockerhub
+ 1. Demo deploy on minikube
+ 1. Suave internals
+   - https://github.com/SuaveIO/suave/blob/master/src/Suave/Tcp.fs#L45
+   - https://github.com/SuaveIO/suave/blob/master/src/Suave/Tcp.fs#L171
+   - https://github.com/SuaveIO/suave/blob/master/src/Suave/Tcp.fs#L119
+ 1. Patterns
+   - Logging `open Suave.Logging`
+   - Env vars https://12factor.net/ https://kubernetes.io/docs/tasks/inject-data-application/distribute-credentials-secure/
+   - Suave-server-per test https://github.com/logibit/Logibit.Hawk/blob/master/src/Logibit.Hawk.Suave.Tests/Hawk.fs#L77-L96
 
-- A framework for easily creating beautiful presentations using HTML.
+ 1. API reference https://suave.io/Suave.html walkthrough
+ 1. Further Resources
+ - Books
+   - [Suave Music Store](https://www.gitbook.com/book/theimowski/suave-music-store/details)
+   - [F# applied](http://products.tamizhvendan.in/fsharp-applied/)
 
+ - Getting started
+   - [Fable Suave Scaffold](https://github.com/fable-compiler/fable-suave-scaffold/)
+   - Ionide Suave template
 
-> **Atwood's Law**: any application that can be written in JavaScript, will eventually be written in JavaScript.
+ - Libraries on top of suave
+   - [Suave EvReact](https://github.com/unipi-itc/Suave.EvReact)
+   - [Suave Swagger](https://github.com/rflechner/Suave.Swagger/blob/develop/examples/Suave.Swagger.PetStoreAPi/Program.fs)
+   - https://rflechner.github.io/Suave.RouteTypeProvider/tutorial.html + [Presentation](https://rflechner.github.io/SuavePresentation/#/5/1)
+   - [FsReveal](https://github.com/fsprojects/FsReveal)
+   - [Ionide/F# auto complete](https://github.com/fsharp/FsAutoComplete)
+   - [Suave.OAuth](https://github.com/SuaveIO/Suave.OAuth)
+   - [Logary SuaveReporter](https://www.nuget.org/packages/Logary.Services.SuaveReporter/)
+   - [Suave Testing](https://github.com/SuaveIO/suave/blob/master/src/Suave.Testing/Testing.fs)
+   - [Suave Locale](https://github.com/SuaveIO/Suave.Locale)
+   - [Logibit Hawk](https://github.com/logibit/logibit.hawk/)
+   - [Suave DotLiquid](https://www.nuget.org/packages/Suave.DotLiquid/)
+   - [Suave Razor](https://www.nuget.org/packages/Suave.Razor/)
+   - [Suave and Azure functions](https://www.nuget.org/packages/Suave.Azure.Functions/)
+   - [WebSharper and Suave](https://www.nuget.org/packages/WebSharper.Suave/)
+   - [Shaver](https://www.nuget.org/packages/Shaver/)
 
-***
+ - Cool demo
+   - [SMSServer](https://github.com/rflechner/SmsServer/blob/master/iOS/AppDelegate.fs)
+   - [Suave from Scratch](https://github.com/search?p=4&q=nuget+Suave&type=Code&utf8=%E2%9C%93) + [YouTube](https://www.youtube.com/watch?v=ujxwW6fFXOc)
+   - [Say whaaat?](https://gist.github.com/haf/007259288fe98de62a88bb4ca37cb944#file-web-fsx)
+   - [Hypermedia-driven lambda calculus evaluator. Yes.](https://github.com/einarwh/hyperlamb)
 
-### FSharp.Formatting
+ - Videos
+   - [Hypermedia APIs with Suave](https://vimeo.com/album/2132360/video/171317244)
+   - [Intro to VS 2017 F# and Suave](https://channel9.msdn.com/Shows/Visual-Studio-Toolbox/Visual-F-Tools)
+   - https://vimeo.com/album/2132360/video/171317244
+   - https://github.com/haf/suave-presentation.2015-09-03
 
-- F# tools for generating documentation (Markdown processor and F# code formatter).
-- It parses markdown and F# script file and generates HTML or PDF.
-- Code syntax highlighting support.
-- It also evaluates your F# code and produce tooltips.
-
-***
-
-### Syntax Highlighting
-
-#### F# (with tooltips)
-
-    let a = 5
-    let factorial x = [1..x] |> List.reduce (*)
-    let c = factorial a
-
----
-
-#### C#
-
-    [lang=cs]
-    using System;
-
-    class Program
-    {
-        static void Main()
-        {
-            Console.WriteLine("Hello, world!");
-        }
-    }
-
----
-
-#### JavaScript
-
-    [lang=js]
-    function copyWithEvaluation(iElem, elem) {
-        return function (obj) {
-            var newObj = {};
-            for (var p in obj) {
-                var v = obj[p];
-                if (typeof v === "function") {
-                    v = v(iElem, elem);
-                }
-                newObj[p] = v;
-            }
-            if (!newObj.exactTiming) {
-                newObj.delay += exports._libraryDelay;
-            }
-            return newObj;
-        };
-    }
-
-
----
-
-#### Haskell
- 
-    [lang=haskell]
-    recur_count k = 1 : 1 : 
-        zipWith recurAdd (recur_count k) (tail (recur_count k))
-            where recurAdd x y = k * x + y
-
-    main = do
-      argv <- getArgs
-      inputFile <- openFile (head argv) ReadMode
-      line <- hGetLine inputFile
-      let [n,k] = map read (words line)
-      printf "%d\n" ((recur_count k) !! (n-1))
-
-*code from [NashFP/rosalind](https://github.com/NashFP/rosalind/blob/master/mark_wutka%2Bhaskell/FIB/fib_ziplist.hs)*
-
----
-
-### SQL
-
-    [lang=sql]
-    select *
-    from
-    (select 1 as Id union all select 2 union all select 3) as X
-    where Id in (@Ids1, @Ids2, @Ids3)
-
-*sql from [Dapper](https://code.google.com/p/dapper-dot-net/)*
-
----
-
-### Paket
-
-    [lang=paket]
-    source https://nuget.org/api/v2
-
-    nuget Suave ~> 2
-    nuget Expecto
-
-    github logary/logary src/Logary.Facade/Facade.fs
-
----
-
-### C/AL
-
-    [lang=cal]
-    PROCEDURE FizzBuzz(n : Integer) r_Text : Text[1024];
-    VAR
-      l_Text : Text[1024];
-    BEGIN
-      r_Text := '';
-      l_Text := FORMAT(n);
-
-      IF (n MOD 3 = 0) OR (STRPOS(l_Text,'3') > 0) THEN
-        r_Text := 'Fizz';
-      IF (n MOD 5 = 0) OR (STRPOS(l_Text,'5') > 0) THEN
-        r_Text := r_Text + 'Buzz';
-      IF r_Text = '' THEN
-        r_Text := l_Text;
-    END;
-
-***
-
-**Bayes' Rule in LaTeX**
-
-$ \Pr(A|B)=\frac{\Pr(B|A)\Pr(A)}{\Pr(B|A)\Pr(A)+\Pr(B|\neg A)\Pr(\neg A)} $
-
-***
-
-### The Reality of a Developer's Life 
-
-**When I show my boss that I've fixed a bug:**
-  
-![When I show my boss that I've fixed a bug](http://www.topito.com/wp-content/uploads/2013/01/code-07.gif)
-  
-**When your regular expression returns what you expect:**
-  
-![When your regular expression returns what you expect](http://www.topito.com/wp-content/uploads/2013/01/code-03.gif)
-  
-*from [The Reality of a Developer's Life - in GIFs, Of Course](http://server.dzone.com/articles/reality-developers-life-gifs)*
-
+ - Github
+   - https://github.com/suaveio
