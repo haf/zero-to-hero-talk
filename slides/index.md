@@ -18,17 +18,16 @@ let executeProcess exe cmdline = "" // stub
 
 ***
 
-### Agenda
+## Agenda
 
  1. Agenda
  1. About me
  1. About [Suave.io](https://suave.io) and Ademar
  1. Demo Say what
  1. Demo chat
- 1. Suave fundamentals
- 1. Package with Dockerfile
- 1. Push to dockerhub
  1. Demo deploy on minikube
+ 1. Suave documentation
+ 1. Suave fundamentals
  1. Suave internals
  1. Patterns
  1. API reference https://suave.io/Suave.html walkthrough
@@ -36,7 +35,7 @@ let executeProcess exe cmdline = "" // stub
  
 ***
 
-### About me
+## About me
 
 <dl>
   <dt>Name</dt>
@@ -54,7 +53,7 @@ let executeProcess exe cmdline = "" // stub
 
 ***
 
-### Why Suave.IO
+## Why Suave.IO
 
 Ademar created it to make it possible for *everyone* to have a personal web server that's more or less free to run for a hosting company.
 
@@ -63,7 +62,7 @@ the needed testing and QA.
 
 ---
 
-### Why Suave.IO
+## Why Suave.IO
 
 I wanted to make running micro-services **easy**. Was building a micro-services platform for my employer.
 
@@ -97,7 +96,7 @@ And the community grew! People are using Suave for [IoT][s-iot], it's driving th
 
 ***
 
-### Easy, I tell you!
+## Easy, I tell you!
 
 Say whaat?
 
@@ -119,13 +118,13 @@ let handle: WebPart =
     }
 ```
 
-***
+---
 
 ### Now you talk!
 
 Chat
 
-***
+---
 
 ### Deployments must be easy!
 
@@ -133,9 +132,65 @@ minikube!
 
 ***
 
-### How does it work?
+## Documenting your API
+
+![Typed routes](./images/rflechner-typed-routes.gif)
+
+---
+
+### Documenting your API (2)
+
+![Swagger output](./images/rflechner-swagger.gif)
+
+[Look at Suave.Swagger][s-swagger]
+
+---
+
+### Documenting your API (3)
+
+[Look at Suave.Swagger][s-swagger]
 
 ***
+
+## More help!
+
+ - [Suave site][suave]
+ - [Suave Music Store](https://www.gitbook.com/book/theimowski/suave-music-store/details)
+ - [F# applied](http://products.tamizhvendan.in/fsharp-applied/)
+ - [API reference][suave-api]
+
+***
+
+## How does it work?
+
+ 1. Spawn a [listening socket][ref-bind]
+ 1. For [every TCP connection][ref-conn], grab the client's socket
+ 1. Parse the [HTTP request][ref-parse], then [run your app][ref-app]
+
+---
+
+### Desirable properties
+
+ - Fast (enough) – 10k requests per second
+ - Async – support zipping a gigabyte file while processing other requests
+ - Easy to get started – getting there
+ - Liveness; lock-free – functional without state sharing
+ – Safety; managed language
+ - Hackable; you can extend it
+
+' The only "dangerous" thing is the buffer management which we stress-/load-test
+
+***
+
+## Patterns
+
+   - Logging `open Suave.Logging`
+   - Env vars https://12factor.net/ https://kubernetes.io/docs/tasks/inject-data-application/distribute-credentials-secure/
+   - Suave-server-per test https://github.com/logibit/Logibit.Hawk/blob/master/src/Logibit.Hawk.Suave.Tests/Hawk.fs#L77-L96
+
+***
+
+
 
  Extra:
 
@@ -152,13 +207,7 @@ minikube!
  1. Push to dockerhub
  1. Demo deploy on minikube
  1. Suave internals
-   - https://github.com/SuaveIO/suave/blob/master/src/Suave/Tcp.fs#L45
-   - https://github.com/SuaveIO/suave/blob/master/src/Suave/Tcp.fs#L171
-   - https://github.com/SuaveIO/suave/blob/master/src/Suave/Tcp.fs#L119
  1. Patterns
-   - Logging `open Suave.Logging`
-   - Env vars https://12factor.net/ https://kubernetes.io/docs/tasks/inject-data-application/distribute-credentials-secure/
-   - Suave-server-per test https://github.com/logibit/Logibit.Hawk/blob/master/src/Logibit.Hawk.Suave.Tests/Hawk.fs#L77-L96
 
  1. API reference https://suave.io/Suave.html walkthrough
  1. Further Resources
@@ -202,9 +251,18 @@ minikube!
  - Github
    - https://github.com/suaveio
 
+ [suave]: https://suave.io
+ [suave-api]: https://suave.io/Suave.html
  [qvitoo]: https://qvitoo.com?utc_source=presentation&amp;utm_campaign=zero-hero
  [s-iot]: https://github.com/unipi-itc/Suave.EvReact
  [s-auto]: https://github.com/fsharp/FsAutoComplete
  [s-reveal]: https://github.com/fsprojects/FsReveal
+ [s-swagger]: https://rflechner.github.io/Suave.Swagger/#/
  [fsharp]: https://github.com/fsharp/fsharp
  [netcore]: https://www.microsoft.com/net/core#macos
+ [rflechnes-routes]: https://rflechner.github.io/SuavePresentation/#/5/1
+
+ [ref-bind]: https://github.com/SuaveIO/suave/blob/master/src/Suave/Tcp.fs#L142
+ [ref-conn]: https://github.com/SuaveIO/suave/blob/master/src/Suave/Tcp.fs#L172
+ [ref-parse]: https://github.com/SuaveIO/suave/blob/master/src/Suave/ParsingAndControl.fs#L51
+ [ref-app]: https://github.com/SuaveIO/suave/blob/master/src/Suave/ParsingAndControl.fs#L72
