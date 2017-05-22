@@ -152,6 +152,28 @@ minikube!
 
 ***
 
+## Localising your app
+
+Using [Suave.Locale][s-locale]:
+
+```
+let neg : LangNeg =
+  Negotiate.negotiate
+    [ ReqSources.parseQuery "locale"
+      ReqSources.parseCookie "locale"
+      ReqSources.parseAcceptable
+      ReqSources.always (Range [ "en" ])]
+    [ LangSources.testAndGetJson test get
+      LangSources.always (defaultLanguage appCtx.settings.rootPath) ]
+  |> Negotiate.assumeSource
+let app =
+  GET >=> path "/i18n/sample"
+      >=> Api.negotiate neg print
+      >=> Api.setVary
+```
+
+***
+
 ## More help!
 
  - [Suave site][suave]
@@ -163,11 +185,14 @@ minikube!
 
 ## How does it work?
 
- 1. Spawn a [listening socket][ref-bind]
- 1. For [every TCP connection][ref-conn], grab the client's socket
- 1. Parse the [HTTP request][ref-parse], then [run your app][ref-app]
+ 1. Spawn a [listening socket][ref-bind]<br/><small><code>use listenSocket = new Socket(binding.endpoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp)</code></small>
+ 1. For [every TCP connection][ref-conn], grab the client's socket <br/><small><code> let! r = transport.accept()</code></small>
+ 1. Parse the [HTTP request][ref-parse]<br/><small><code>let! result' = facade.processRequest _ctx</code></small>
+ 1. then [run your app][ref-app]<br/><small><code>let! result'' = HttpOutput.addKeepAliveHeader ctx |> HttpOutput.run consumer</code></small>
+ 1. Depending on whether your app returned [Bytes xs][ref-bytes], a [SocketTask task][ref-st] or [didn't do anything][ref-null], write the contents.
 
 ---
+
 
 ### Desirable properties
 
@@ -258,6 +283,7 @@ minikube!
  [s-auto]: https://github.com/fsharp/FsAutoComplete
  [s-reveal]: https://github.com/fsprojects/FsReveal
  [s-swagger]: https://rflechner.github.io/Suave.Swagger/#/
+ [s-locale]: 
  [fsharp]: https://github.com/fsharp/fsharp
  [netcore]: https://www.microsoft.com/net/core#macos
  [rflechnes-routes]: https://rflechner.github.io/SuavePresentation/#/5/1
@@ -266,3 +292,6 @@ minikube!
  [ref-conn]: https://github.com/SuaveIO/suave/blob/master/src/Suave/Tcp.fs#L172
  [ref-parse]: https://github.com/SuaveIO/suave/blob/master/src/Suave/ParsingAndControl.fs#L51
  [ref-app]: https://github.com/SuaveIO/suave/blob/master/src/Suave/ParsingAndControl.fs#L72
+ [ref-bytes]: https://github.com/SuaveIO/suave/blob/master/src/Suave/HttpOutput.fs#L42
+ [ref-st]: https://github.com/SuaveIO/suave/blob/master/src/Suave/HttpOutput.fs#L68
+ [ref-null]: https://github.com/SuaveIO/suave/blob/master/src/Suave/HttpOutput.fs#L71
