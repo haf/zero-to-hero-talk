@@ -35,7 +35,7 @@
   <dd>Henrik Feldt</dd>
 
   <dt>Founder of</dt>
-  <dd>[qvitoo.com – A.I for the digital company](https://qvitoo.com?utc_source=presentation&amp;utm_campaign=zero-hero)</dd>
+  <dd>[qvitoo.com – A.I for the digital business][qvitoo]</dd>
 
   <dt>Will talk about</dt>
   <dd>[Getting started with HTTP](https://suave.io)</dd>
@@ -46,9 +46,64 @@
 
 ***
 
-### About Suave.IO
+### Why Suave.IO
 
+Ademar created it to make it possible for *everyone* to have a personal web server that's more or less free to run for a hosting company.
 
+It stagnated a bit. A while later I came along and started pushing it towards production stability, by filing issues and doing
+the needed testing and QA.
+
+---
+
+### Why Suave.IO
+
+I wanted to make running micro-services **easy**. Was building a micro-services platform for my employer.
+
+Suave became the solution. It's been running in production for 5 years now.
+
+---
+
+### Why continue?
+
+Started a company – [qvitoo](https://qvitoo.com), wanted to build it right™.
+
+And the community grew! People are using Suave for [IoT][s-iot], it's driving the [F# autocomplete][s-auto] service in Ionide, it's a complete OWIN server, a complete WebSockets server. Even this presentation runs on Suave with [FsReveal][s-reveal]!
+
+---
+
+### But still, all the time?
+
+ - If everybody should learn to program, it should be fun!
+ - I have a clear idea about how easy web development should be, and I want to share that idea with the world!
+
+---
+
+### But still, all the time?
+
+ - The technical platform is turning more open:
+  - F# has turned [Apache 2][fsharp]
+  - [.Net Core][netcore] is showing promise
+ - It could mean the old, walled-garden Microsoft is coming to an end
+  - Or at least you're not in their walled cloud instead of their walled
+    dev laptop
+
+***
+
+### Easy, I tell you!
+
+Say whaat?
+
+***
+
+### Now you talk!
+
+Chat
+
+***
+
+### Deployments must be easy!
+
+minikube!
 
 ***
 
@@ -116,3 +171,10 @@
 
  - Github
    - https://github.com/suaveio
+
+ [qvitoo]: https://qvitoo.com?utc_source=presentation&amp;utm_campaign=zero-hero
+ [s-iot]: https://github.com/unipi-itc/Suave.EvReact
+ [s-auto]: https://github.com/fsharp/FsAutoComplete
+ [s-reveal]: https://github.com/fsprojects/FsReveal
+ [fsharp]: https://github.com/fsharp/fsharp
+ [netcore]: https://www.microsoft.com/net/core#macos
