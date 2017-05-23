@@ -1,5 +1,6 @@
 paket.local
 FSI-ASSEMBLY.dll
+.paket/
 
 # User-specific files
 *.suo

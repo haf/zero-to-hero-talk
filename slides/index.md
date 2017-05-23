@@ -6,6 +6,21 @@
 
 ***
 
+## FuncProgSTHLM Tonight
+
+ - 17:00 – Meet and greet
+ - 17:20 – From Zero to Hero of HTTP APIs
+ - 18:10 – Food and break
+ - 18:25 – The Database as a Value
+ - 18:50 – Functional, reloading, data-driven, reactive frontend
+ - 19:20 – Roundtable "Does functional programming work for real-life projects?"
+ - 19:50-20:30 – Mingle and AW
+
+<img src="./images/qvitoo.svg" style="float:right;border:none;width:20%" title="Sponsored by qvitoo" />
+<img src="./images/foocafe.svg" style="float:right;border:none;width:60%:margin: 10px" title="Sponsored by FooCafé" />
+
+***
+
 ### From Zero to Hero with HTTP APIs
 
 <div style="display:none">
@@ -129,7 +144,7 @@ let handle: WebPart =
 
 ### Now you talk!
 
-Chat
+Chat (if there's time, afterwards)
 
 ---
 

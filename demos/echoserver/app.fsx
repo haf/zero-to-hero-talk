@@ -43,7 +43,7 @@ let app: WebPart =
         |> appnl value)
         (StringBuilder())
     |> sprintf "%O"
-    |> OK
+    |> Suave.Successful.CREATED
   )
 
 let config =
