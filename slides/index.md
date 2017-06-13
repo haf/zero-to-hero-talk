@@ -6,23 +6,6 @@
 
 ***
 
-## FuncProgSTHLM Tonight
-
- - 17:00 – Meet and greet
- - 17:20 – From Zero to Hero of HTTP APIs
- - 18:10 – Food and break
- - 18:25 – The Database as a Value
- - 18:50 – Functional, reloading, data-driven, reactive frontend
- - 19:20 – Roundtable "Does functional programming work for real-life projects?"
- - 19:50-20:30 – Mingle and AW
-
-<img src="./images/qvitoo.svg" style="float:right;border:none;width:20%" title="Sponsored by qvitoo" />
-<img src="./images/foocafe.svg" style="float:right;border:none;width:60%:margin: 10px" title="Sponsored by FooCafé" />
-
-***
-
-### From Zero to Hero with HTTP APIs
-
 <div style="display:none">
 ```fsharp
 #r "../demos/say/packages/Suave/lib/net40/Suave.dll"
@@ -39,39 +22,54 @@ let executeProcess exe cmdline = "" // stub
 ```
 </div>
 
+### From Zero to Hero with HTTP APIs
+
 ***
 
 ## Agenda
 
- 1. Agenda
- 1. About me
- 1. About [Suave.io](https://suave.io) and Ademar
- 1. Demo Say what
+ 1. History
+ 1. Intro to HTTP
+ 1. F# for HTTP APIs
  1. Demo chat
  1. Demo deploy on minikube
- 1. Suave documentation
- 1. Suave fundamentals
- 1. Suave internals
  1. Patterns
  1. Further Resources
  
+<img src="./images/qvitoo.svg" style="float:right;border:none;width:20%" title="Sponsored by qvitoo" />
+
 ***
 
-## About me
+## Me
 
 <dl>
   <dt>Name</dt>
   <dd>Henrik Feldt</dd>
 
+  <dt>Producer of open source</dt>
+  <dd>Suave, Expecto, Logary, Http.fs, Logibit.Hawk, Mailgun.fs, Fakta, albacore, dotliquid, F#'s docker image, ...</dd>
+
   <dt>Founder of</dt>
-  <dd>[qvitoo.com – A.I for the digital business][qvitoo]</dd>
-
-  <dt>Will talk about</dt>
-  <dd>[Getting started with HTTP](https://suave.io)</dd>
-
-  <dt>Why?</dt>
-  <dd>Give you the tools to create what you want, on the web, or for home automation, or ...</dd>
+  <dd>[qvitoo.com – aims for AI accounting][qvitoo]</dd>
 </dl>
+
+***
+
+## Why listen to this talk?
+
+---
+
+### Functionally curious.
+
+---
+
+### Interested in web server construction.
+
+***
+
+## Intro to HTTP
+
+ - 
 
 ***
 
